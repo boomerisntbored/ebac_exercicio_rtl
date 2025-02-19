@@ -1,15 +1,32 @@
-import Post from "./components/Post";
+import { Provider } from 'react-redux'
+import Header from './components/Header'
+import Produtos from './containers/Produtos'
 
-import styles from './App.module.css';
+import { GlobalStyle } from './styles'
+
+import { configuraStore } from './store'
+const store = configuraStore()
+
+export type Game = {
+  id: number
+  titulo: string
+  plataformas: string[]
+  precoAntigo: number
+  preco: number
+  categoria: string
+  imagem: string
+}
 
 function App() {
   return (
-    <div className={styles.app}>
-      <Post imageUrl="https://www.orangeboxminiaturas.com.br/img/products/batmovel-1989-figura-batman-em-metal-jada-toys-1-24-jad-98260_1_1000.jpg">
-        Olha só que legal minha miniatura do Batmóvel.
-      </Post>
-    </div>
-  );
+    <Provider store={store}>
+      <GlobalStyle />
+      <div className="container">
+        <Header />
+        <Produtos />
+      </div>
+    </Provider>
+  )
 }
 
-export default App;
+export default App
